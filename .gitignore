@@ -1,0 +1,16 @@
+# Generated worker projects (setup-open-brain.sh output)
+*-worker/
+*-worker.bak.*/
+
+# Local tooling state
+.omc/
+.claude/
+
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*~
