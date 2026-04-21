@@ -21,29 +21,44 @@ A one-click setup script and guide for deploying a personal AI memory system as 
 
 ## Quick Start
 
-```bash
-# Clone the repo
-git clone https://github.com/gecko-industries/open-brain-cf.git
-cd open-brain-cf
+Run this in any directory — it provisions everything and emits an `open-brain-worker/` folder beside it:
 
-# Run the setup script (creates infrastructure + deploys)
-chmod +x setup-open-brain.sh
-./setup-open-brain.sh
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/aspitz/open-brain-cf/main/setup-open-brain.sh)
+```
+
+Pass a custom name as an argument:
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/aspitz/open-brain-cf/main/setup-open-brain.sh) my-brain
 ```
 
 The script handles everything: D1 database creation, Vectorize index setup, Worker deployment, schema application, and secret configuration. Credentials are saved to `<name>-worker/credentials.txt`.
 
-### Custom Name
+### Clone for Persistence
+
+If you want the script available locally (e.g., to tear down later), clone instead:
 
 ```bash
-./setup-open-brain.sh my-brain
+git clone https://github.com/aspitz/open-brain-cf.git
+cd open-brain-cf
+./setup-open-brain.sh            # default name "open-brain"
+./setup-open-brain.sh my-brain   # custom name
 ```
 
 ### Delete Everything
 
+With a local clone:
+
 ```bash
 ./setup-open-brain.sh --delete
 ./setup-open-brain.sh --delete my-brain
+```
+
+Or via the one-liner:
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/aspitz/open-brain-cf/main/setup-open-brain.sh) --delete
 ```
 
 ## Connecting AI Clients
