@@ -134,6 +134,28 @@ Cloudflare's free tier covers personal usage:
 | Vectorize | 5M stored vector dimensions |
 | Workers AI | 10,000 neurons/day |
 
+## Testing
+
+Two scripts verify different layers of the system. Run them from the repo root.
+
+### `test-generator.sh` — pre-flight
+
+Validates `setup-open-brain.sh` without deploying anything (syntax check, Worker heredoc invariants, `/mcp`-before-auth routing order, two-phase deploy preserved). Useful before committing changes to the generator.
+
+```bash
+./test-generator.sh
+```
+
+### `test-deployment.sh` — live smoke test
+
+Hits a deployed Worker end-to-end: health, auth gate, capture round-trip, MCP `initialize`/`tools/list`/`tools/call`, and polls `/search` until the background embedding lands. Credentials are read from `<brain-name>-worker/credentials.txt` (written by the setup script) or from env vars.
+
+```bash
+./test-deployment.sh                       # default brain "open-brain"
+./test-deployment.sh my-brain              # custom brain
+WORKER_URL=https://… MCP_ACCESS_KEY=… ./test-deployment.sh   # explicit
+```
+
 ## Documentation
 
 See [open-brain-cloudflare.md](open-brain-cloudflare.md) for the full step-by-step build guide.
