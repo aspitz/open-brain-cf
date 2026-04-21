@@ -24,13 +24,13 @@ A one-click setup script and guide for deploying a personal AI memory system as 
 Run this in any directory — it provisions everything and emits an `open-brain-worker/` folder beside it:
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/aspitz/open-brain-cf/main/setup-open-brain.sh)
+curl -fsSL https://raw.githubusercontent.com/aspitz/open-brain-cf/main/setup-open-brain.sh | bash
 ```
 
-Pass a custom name as an argument:
+Pass a custom name by forwarding it through `bash -s --`:
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/aspitz/open-brain-cf/main/setup-open-brain.sh) my-brain
+curl -fsSL https://raw.githubusercontent.com/aspitz/open-brain-cf/main/setup-open-brain.sh | bash -s -- my-brain
 ```
 
 The script handles everything: D1 database creation, Vectorize index setup, Worker deployment, schema application, and secret configuration. Credentials are saved to `<name>-worker/credentials.txt`.
@@ -48,17 +48,11 @@ cd open-brain-cf
 
 ### Delete Everything
 
-With a local clone:
+Tear-down has an interactive confirmation prompt, so run it from a local clone:
 
 ```bash
 ./setup-open-brain.sh --delete
 ./setup-open-brain.sh --delete my-brain
-```
-
-Or via the one-liner:
-
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/aspitz/open-brain-cf/main/setup-open-brain.sh) --delete
 ```
 
 ## Connecting AI Clients
